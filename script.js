@@ -2,14 +2,14 @@ function playGame(){
 let humanScore=0;
 let computerScore=0;
 function getComputerChoice(){
-    let n =Math.floor(Math.random()*10)%3;
+    let n =Math.floor(Math.random()*3);
     if (n ===0){
         return "rock";
     }
     else if (n ===1){
         return "paper";
     }
-    else if (n ===2){
+    else {
         return "scissors";
     }
 }
@@ -23,6 +23,10 @@ function getHumanChoice(){
     }
     else if (choice ===2){
         return "scissors";
+    }
+    else{
+        console.log("Invalid choice! Please enter 0, 1, or 2.");
+        return getHumanChoice();
     }
 }
 
@@ -44,7 +48,7 @@ function playRound(){
         computerScore++;
         console.log("Computer wins!"+y+" beats "+x);
     }
-    return;
+    
 }
 function letsPLay(){
 for(let i=0; i<5; i++){
@@ -59,3 +63,4 @@ else console.log("Computer wins the game! Better luck next time!");
 }
 letsPLay();
 }
+playGame();
