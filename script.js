@@ -1,4 +1,6 @@
-
+function playGame(){
+let humanScore=0;
+let computerScore=0;
 function getComputerChoice(){
     let n =Math.floor(Math.random()*10)%3;
     if (n ===0){
@@ -22,4 +24,38 @@ function getHumanChoice(){
     else if (choice ===2){
         return "scissors";
     }
+}
+
+function playRound(){
+    let x = getHumanChoice();
+    let y = getComputerChoice();
+    console.log("Computer choice: " + y);
+    if (x === y){
+        console.log("It's a tie!");
+    }
+    else if ((x === "rock" && y === "scissors") || (x === "paper" && y === "rock") || (x === "scissors" && y === "paper")){
+        
+        
+        humanScore++;
+         console.log("You win!"+x+" beats "+y);
+    }
+    else{
+        
+        computerScore++;
+        console.log("Computer wins!"+y+" beats "+x);
+    }
+    return;
+}
+function letsPLay(){
+for(let i=0; i<5; i++){
+    playRound();
+}
+console.log("Final Score: Human: " + humanScore + " Computer: " + computerScore);
+if (humanScore > computerScore){
+    console.log("Congratulations! You won the game!");
+    
+}
+else console.log("Computer wins the game! Better luck next time!");
+}
+letsPLay();
 }
