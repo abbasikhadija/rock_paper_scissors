@@ -13,54 +13,64 @@ function getComputerChoice(){
         return "scissors";
     }
 }
-function getHumanChoice(){
-    let choice=parseInt(prompt("Enter your choice: 0 for rock, 1 for paper, 2 for scissors"));
-    if (choice ===0){
+
+function getHumanChoice(event){
+    let choice = event.target.id;
+    if (choice ==="rock"){
         return "rock";
     }
-    else if (choice ===1){
+    else if (choice ==="paper"){
         return "paper";
     }
-    else if (choice ===2){
+    else if(choice ==="scissors"){
         return "scissors";
     }
-    else{
-        console.log("Invalid choice! Please enter 0, 1, or 2.");
-        return getHumanChoice();
-    }
+    
 }
 
-function playRound(){
-    let x = getHumanChoice();
+function playRound(event){
+    dialog.innerText="choose your move from the buttons above";
+    let x = getHumanChoice(event);
+        dialog.innerText="You chose: "+x;
     let y = getComputerChoice();
-    console.log("Computer choice: " + y);
+    dialog.innerText="Computer choice: " + y;
     if (x === y){
-        console.log("It's a tie!");
+        result.innerText="It's a tie!";
     }
     else if ((x === "rock" && y === "scissors") || (x === "paper" && y === "rock") || (x === "scissors" && y === "paper")){
         
         
         humanScore++;
-         console.log("You win!"+x+" beats "+y);
+         result.innerText="You win! "+x+" beats "+y;
     }
     else{
         
         computerScore++;
-        console.log("Computer wins!"+y+" beats "+x);
+        result.innerText="Computer wins! "+y+" beats "+x;
     }
+    if (humanScore === 5 || computerScore === 5){
+    result.innerText = humanScore > computerScore
+        ? "Congratulations! You won the game!"
+        : "Computer wins the game!";
+    
+    div.removeEventListener("click", playRound);
+}
     
 }
-function letsPLay(){
-for(let i=0; i<5; i++){
-    playRound();
+
+
+
+
+let div=document.getElementById("choices");
+
+div.addEventListener("click", playRound);
+let result=document.getElementById("result");
+
+
+let dialog=document.createElement("div");
+document.body.appendChild(dialog);
+
+
 }
-console.log("Final Score: Human: " + humanScore + " Computer: " + computerScore);
-if (humanScore > computerScore){
-    console.log("Congratulations! You won the game!");
-    
-}
-else console.log("Computer wins the game! Better luck next time!");
-}
-letsPLay();
-}
+
 playGame();
